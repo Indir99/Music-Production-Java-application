@@ -43,11 +43,6 @@ public class HelloApplication extends Application {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/muzickaProdukcija", "indir", "Iceking99.");
             Statement statement = connection.createStatement();
-
-            //ResultSet resultSet = statement.executeQuery("SELECT * FROM izvodjac");
-            //while (resultSet.next()) {
-            //    System.out.println(resultSet.getString("imeIzvodjac"));
-           // }
             return connection;
         } catch (Exception e)
         {
@@ -57,18 +52,13 @@ public class HelloApplication extends Application {
     }
 
     public static ObservableList<izvodjac> getDataIzvodjac() throws SQLException {
-        System.out.println("Hahahaha");
         Connection conn = ConnectDb();
-        //Statement statement = conn.createStatement();
-        //ResultSet resultSet = statement.executeQuery("SELECT * FROM izvodjac");
 
         ObservableList<izvodjac> listIzvodjac = FXCollections.observableArrayList();
         try{
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM izvodjac");
             while (rs.next()){
-                System.out.println(listIzvodjac.size());
-                //System.out.println(rs.getString("imeIzvodjac"));
                 listIzvodjac.add(new izvodjac(Integer.parseInt(rs.getString("sifraIzvodjac")),rs.getString("imeIzvodjac"),
                         rs.getString("prezimeIzvodjac"),rs.getString("umjImeIzvodjac"), rs.getString("adresaIzvodjac"),
                         rs.getString("kontaktIzvodjac"),rs.getDate("datRodjIzvodjac")));
@@ -78,5 +68,64 @@ public class HelloApplication extends Application {
             System.out.println(e.fillInStackTrace());
         }
         return listIzvodjac;
+    }
+
+    public static ObservableList<tekstopisac> getDataTekstopisac() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<tekstopisac> listTekstopisac = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM tekstopisac");
+            while (rs.next()){
+                listTekstopisac.add(new tekstopisac(Integer.parseInt(rs.getString("sifraTekstopisac")),rs.getString("imeTekstopisac"),
+                        rs.getString("prezimeTekstopisac"),rs.getString("umjImeTekstopisac"), rs.getString("adresaTekstopisac"),
+                        rs.getString("kontaktTekstopisac"),rs.getDate("datRodjTekstopisac")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listTekstopisac;
+    }
+
+
+    public static ObservableList<aranzer> getDataAranzer() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<aranzer> listAranzer = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM aranzer");
+            while (rs.next()){
+                listAranzer.add(new aranzer(Integer.parseInt(rs.getString("sifraAranzer")),rs.getString("imeAranzer"),
+                        rs.getString("prezimeAranzer"),rs.getString("umjImeAranzer"), rs.getString("adresaAranzer"),
+                        rs.getString("kontaktAranzer"),rs.getDate("datRodjAranzer")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listAranzer;
+    }
+
+
+    public static ObservableList<kompozitor> getDataKompozitor() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<kompozitor> listKompozitor = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM kompozitor");
+            while (rs.next()){
+                listKompozitor.add(new kompozitor(Integer.parseInt(rs.getString("sifraKompozitor")),rs.getString("imeKompozitor"),
+                        rs.getString("prezimeKompozitor"),rs.getString("umjImeKompozitor"), rs.getString("adresaKompozitor"),
+                        rs.getString("kontaktKompozitor"),rs.getDate("datRodjKompozitor")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listKompozitor;
     }
 }
