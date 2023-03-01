@@ -224,6 +224,34 @@ public class HelloController implements Initializable {
     //Pretrazi funkciju:
     public TextField tfPFfilter;
 
+    // Pjesma - table
+    public TableView<pjesma> tablePjesma;
+    public TableColumn<pjesma,Integer> tcSifraPjesma,tcSifraIzvodjacPjesma,tcSifraAlbumPjesma, tcSifraSpotPjesma;
+    public TableColumn<pjesma,Integer> tcSifraTekstopisacPjesma,tcSifraKompozitorPjesma,tcSifraAranzerPjesma, tcSifraZanrPjesma;
+    public TableColumn<pjesma,String> tcNazivPjesma, tcJezikPjesma;
+    public TableColumn<pjesma, Date> tcDatumIzdavanjaPjesma;
+    ObservableList<pjesma> listPjesma;
+    ObservableList<pjesma> dataListPjesma;
+    // Dodaj pjesmu
+    public TextField tfDPsifraIzvodjac, tfDPsifraAlbum, tfDPsifraSpot, tfDPnaziv, tfDPjezik, tfDPsifraTekstopisac;
+    public TextField tfDPsifraKompozitor, tfDPsifraAranzer, tfDPsifraZanr;
+    public DatePicker dpDPdatIzd;
+    public Button btnDodajPjesmu;
+    //Uredi pjesmu
+    public TextField tfUPsifra, tfUPsifraIzvodjac, tfUPsifraAlbum, tfUPsifraSpot, tfUPnaziv, tfUPjezik, tfUPsifraTekstopisac;
+    public TextField tfUPsifraKompozitor, tfUPsifraAranzer, tfUPsifraZanr;
+    public DatePicker dpUPdatIzd;
+    public Button btnUrediPjesmu;
+    //Izbrisi pjesmu
+    public TextField tfIPsifra;
+    public Button btnIzbrisiPjesmu;
+    //Pretrazi pjesmu:
+    public TextField tfPPfilter;
+
+
+
+
+
 
     //Connection
     Connection conn = null;
@@ -398,6 +426,9 @@ public class HelloController implements Initializable {
 
         updateFunkcijaTable();
         pretraziFunkcije();
+
+        updatePjesmaTable();
+        pretraziPjesme();
 
 
     }
@@ -1835,5 +1866,203 @@ public class HelloController implements Initializable {
         }
         return false;
     }
+
+    /* ----------------------------------------------- pjesma ------------------------------------------*/
+    public void dodajPjesmu() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO pjesma (sifraIzvodjac, sifraAlbum, sifraSpot, nazivPjesma, jezikPjesma, datumIzdavanjaPjesma, " +
+                "sifraTekstopisac, sifraKompozitor, sifraAranzer, sifraZanr) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        try{
+            pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, Integer.parseInt(tfDPsifraIzvodjac.getText()));
+            pst.setInt(2, Integer.parseInt(tfDPsifraAlbum.getText()));
+            pst.setInt(3, Integer.parseInt(tfDPsifraSpot.getText()));
+            pst.setString(4,tfDPnaziv.getText());
+            pst.setString(5,tfDPjezik.getText());
+            pst.setDate(6, java.sql.Date.valueOf(dpDPdatIzd.getValue()));
+            pst.setInt(7, Integer.parseInt(tfDPsifraTekstopisac.getText()));
+            pst.setInt(8, Integer.parseInt(tfDPsifraKompozitor.getText()));
+            pst.setInt(9, Integer.parseInt(tfDPsifraAranzer.getText()));
+            pst.setInt(10, Integer.parseInt(tfDPsifraZanr.getText()));
+            pst.execute();
+
+            AlertBox.display("Dodaj pjesmu","Uspješno ste dodali pjesmu.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj pjesmu","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updatePjesmaTable();
+        pretraziPjesme();
+    }
+
+    public void urediPjesmu(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUPsifra.getText());
+            Integer sifraIzvodjac = Integer.valueOf(tfUPsifraIzvodjac.getText());
+            Integer sifraAlbum = Integer.valueOf(tfUPsifraAlbum.getText());
+            Integer sifraSpot = Integer.valueOf(tfUPsifraSpot.getText());
+            if(checkID(sifraIzvodjac) && checkIDalbum(sifraAlbum) && checkIDspot(sifraSpot) && checkIDpjesma(sifra)){
+                String naziv = tfUPnaziv.getText();
+                if(!(naziv.isEmpty()))
+                {
+                    String sql = "UPDATE pjesma SET nazivPjesma = '"+naziv+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                String jezik = tfUPjezik.getText();
+                if(!(jezik.isEmpty()))
+                {
+                    String sql = "UPDATE pjesma SET jezikPjesma = '"+jezik+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                Date datIzd = java.sql.Date.valueOf(dpUPdatIzd.getValue());
+                if(datIzd != null)
+                {
+                    String sql = "UPDATE pjesma SET datumIzdavanjaPjesma='"+datIzd+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                Integer sifraTekstopisac = Integer.valueOf(tfUPsifraTekstopisac.getText());
+                if(sifraTekstopisac >= 0)
+                {
+                    String sql = "UPDATE pjesma SET sifraTekstopisac = '"+sifraTekstopisac+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                Integer sifraKompozitor = Integer.valueOf(tfUPsifraKompozitor.getText());
+                if(sifraKompozitor >= 0)
+                {
+                    String sql = "UPDATE pjesma SET sifraKompozitor = '"+sifraKompozitor+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                Integer sifraAranzer = Integer.valueOf(tfUPsifraAranzer.getText());
+                if(sifraAranzer >= 0)
+                {
+                    String sql = "UPDATE pjesma SET sifraAranzer = '"+sifraAranzer+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+                Integer sifraZanr = Integer.valueOf(tfUPsifraZanr.getText());
+                if(sifraZanr >= 0)
+                {
+                    String sql = "UPDATE pjesma SET sifraZanr = '"+sifraTekstopisac+"' WHERE sifraPjesma ='"+sifra+"';";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                }
+
+            }
+            else{
+                AlertBox.display("Uredi pjesmu","Provjerite ispravnost sifri koje unosite.");
+            }
+            AlertBox.display("Uredi pjesmu","Uspješno ste izmijenili podatke pjesme.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi pjesmu","Error: Neuspješna izmjena.");
+        }
+        updatePjesmaTable();
+        pretraziPjesme();
+    }
+
+    public void updatePjesmaTable(){
+        try {
+            tcSifraPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifra"));
+            tcSifraIzvodjacPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraIzvodjac"));
+            tcSifraAlbumPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraAlbum"));
+            tcSifraSpotPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraSpot"));
+            tcNazivPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, String>("naziv"));
+            tcJezikPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, String>("jezik"));
+            tcDatumIzdavanjaPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Date>("DatIzd"));
+            tcSifraTekstopisacPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraTekstopisac"));
+            tcSifraKompozitorPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraKompozitor"));
+            tcSifraAranzerPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraAranzer"));
+            tcSifraZanrPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraZanr"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listPjesma = HelloApplication.getDataPjesma();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tablePjesma.setItems(listPjesma);
+    }
+
+    public void izbrisiPjesmu() {
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfIPsifra.getText());
+            if(checkIDpjesma(sifra)) {
+                String sql = "DELETE FROM pjesma WHERE sifraPjesma='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updatePjesmaTable();
+                pretraziPjesme();
+                AlertBox.display("Izbriši pjesmu","Uspješno ste izbrisali pjesmu.");
+            }
+            else{
+                AlertBox.display("Izbriši pjesmu","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši Pjesmu","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziPjesme(){
+        tcSifraIzvodjacPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraIzvodjac"));
+        tcSifraAlbumPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraAlbum"));
+        tcSifraSpotPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraSpot"));
+        tcNazivPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, String>("naziv"));
+        tcJezikPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, String>("jezik"));
+        tcDatumIzdavanjaPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Date>("DatIzd"));
+        tcSifraTekstopisacPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraTekstopisac"));
+        tcSifraKompozitorPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraKompozitor"));
+        tcSifraAranzerPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraAranzer"));
+        tcSifraZanrPjesma.setCellValueFactory(new PropertyValueFactory<pjesma, Integer>("sifraZanr"));
+        try {
+            dataListPjesma = HelloApplication.getDataPjesma();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tablePjesma.setItems(dataListPjesma);
+        FilteredList<pjesma> filteredData = new FilteredList<>(dataListPjesma, b -> true);
+        tfPPfilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getNaziv().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getJezik().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<pjesma> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tablePjesma.comparatorProperty());
+        tablePjesma.setItems(sortedData);
+    }
+    private boolean checkIDpjesma(Integer sifra) {
+        for (pjesma singer : listPjesma) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 }

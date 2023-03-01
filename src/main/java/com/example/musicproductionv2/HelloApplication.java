@@ -224,4 +224,25 @@ public class HelloApplication extends Application {
         }
         return listFunkcija;
     }
+
+    public static ObservableList<pjesma> getDataPjesma() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<pjesma> listPjesma = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM pjesma");
+            while (rs.next()){
+                listPjesma.add(new pjesma(Integer.parseInt(rs.getString("sifraPjesma")), Integer.parseInt(rs.getString("sifraIzvodjac")),
+                        Integer.parseInt(rs.getString("sifraAlbum")),Integer.parseInt(rs.getString("sifraSpot")),
+                        Integer.parseInt(rs.getString("sifraTekstopisac")), Integer.parseInt(rs.getString("sifraKompozitor")),
+                        Integer.parseInt(rs.getString("sifraAranzer")), Integer.parseInt(rs.getString("sifraZanr")),
+                        rs.getString("nazivPjesma"),rs.getString("jezikPjesma"), rs.getDate("datumIzdavanjaPjesma")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listPjesma;
+    }
 }
