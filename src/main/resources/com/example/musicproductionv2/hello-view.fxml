@@ -27,11 +27,11 @@
                   <Button fx:id="btnTekstopisac" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="TEKSTOPISAC" />
                   <Button fx:id="btnAranzer" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="ARANŽER" />
                   <Button fx:id="btnKompozitor" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="KOMPOZITOR" />
-                  <Button fx:id="btnOsoba" mnemonicParsing="false" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="OSOBA" />
-                  <Button fx:id="btnZanr" mnemonicParsing="false" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="ŽANR" />
-                  <Button fx:id="btnAlbum" mnemonicParsing="false" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="ALBUM" />
-                  <Button fx:id="btnSpot" mnemonicParsing="false" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="SPOT" />
-                  <Button fx:id="btnFunkcija" mnemonicParsing="false" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="FUNKCIJA" />
+                  <Button fx:id="btnOsoba" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="OSOBA" />
+                  <Button fx:id="btnZanr" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="ŽANR" />
+                  <Button fx:id="btnAlbum" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="ALBUM" />
+                  <Button fx:id="btnSpot" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="SPOT" />
+                  <Button fx:id="btnFunkcija" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="154.0" stylesheets="@style.css" text="FUNKCIJA" />
                </children>
             </VBox>
          </left>
@@ -49,7 +49,7 @@
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane fx:id="panePjesma" opacity="0.0" prefHeight="464.0" prefWidth="847.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="panePjesma" prefHeight="464.0" prefWidth="847.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj pjesmu">
                            <content>
@@ -604,7 +604,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneKompozitor" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneKompozitor" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj kompozitora">
                            <content>
@@ -741,6 +741,552 @@
                                     </Label>
                                     <TextField fx:id="tfIKsifra" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
                                     <Button fx:id="btnIzbrisiKompozitora" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiKompozitora" prefHeight="27.0" prefWidth="236.0" text="Izbriši kompozitora" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="paneOsoba" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Dodaj osobu">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Ime ">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDOime" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="143.0" text="Prezime ">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDOprezime" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="118.0" text="Zanimanje">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDOzanimanje" layoutX="180.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="120.0" prefHeight="26.0" prefWidth="118.0" text="Datum rođenja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Label layoutX="31.0" layoutY="153.0" prefHeight="26.0" prefWidth="118.0" text="Adresa">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDOadresa" layoutX="180.0" layoutY="154.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="188.0" prefHeight="26.0" prefWidth="118.0" text="Kontakt">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDOkontakt" layoutX="180.0" layoutY="189.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnDodajOsobu" layoutX="182.0" layoutY="231.0" mnemonicParsing="false" onAction="#dodajOsobu" prefHeight="27.0" prefWidth="236.0" text="Dodaj osobu " />
+                                    <DatePicker fx:id="dpDOdatRodj" layoutX="179.0" layoutY="121.0" prefHeight="24.0" prefWidth="241.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Uredi osobu">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra osobe">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOsifra" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="118.0" text="Ime ">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOime" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="140.0" text="Prezime ">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOprezime" layoutX="180.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="120.0" prefHeight="26.0" prefWidth="118.0" text="Zanimanje">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOzanimanje" layoutX="180.0" layoutY="121.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="153.0" prefHeight="26.0" prefWidth="118.0" text="Datum rođenja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Label layoutX="31.0" layoutY="188.0" prefHeight="26.0" prefWidth="118.0" text="Adresa">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOadresa" layoutX="180.0" layoutY="189.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnUrediOsobu" layoutX="182.0" layoutY="260.0" mnemonicParsing="false" onAction="#urediOsobu" prefHeight="27.0" prefWidth="236.0" text="Uredi osobu" />
+                                    <Label layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="118.0" text="Kontakt">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUOkontakt" layoutX="180.0" layoutY="224.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <DatePicker fx:id="dpUOdatRodj" layoutX="180.0" layoutY="154.0" prefHeight="24.0" prefWidth="237.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Pretraži osobe">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="848.0">
+                                 <children>
+                                    <TableView fx:id="tableOsoba" layoutX="-2.0" layoutY="156.0" prefHeight="267.0" prefWidth="852.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcSifraOsoba" prefWidth="75.0" text="Sifra " />
+                                          <TableColumn fx:id="tcImeOsoba" prefWidth="75.0" text="Ime" />
+                                          <TableColumn fx:id="tcPrezimeOsoba" prefWidth="75.0" text="Prezime" />
+                                          <TableColumn fx:id="tcZanimanjeOsoba" prefWidth="75.0" text="Zanimanje" />
+                                          <TableColumn fx:id="tcDatRodjOsoba" prefWidth="75.0" text="Datum rodjenja" />
+                                          <TableColumn fx:id="tcAdresaOsoba" prefWidth="75.0" text="Adresa" />
+                                          <TableColumn fx:id="tcKontaktOsoba" prefWidth="75.0" text="Kontakt" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="59.0" layoutY="24.0" prefHeight="26.0" prefWidth="428.0" text="Unesite ključnu riječ na osnovu koje želite pretražiti osobe:">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfPOfilter" layoutX="484.0" layoutY="25.0" prefHeight="24.0" prefWidth="214.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Izbriši osobu">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="118.0" text="Šifra osobe">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfIOsifra" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnIzbrisiOsobu" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiOsobu" prefHeight="27.0" prefWidth="236.0" text="Izbriši osobu" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="paneZanr" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Dodaj žanr">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Naziv">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDZnaziv" layoutX="150.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="143.0" text="Kratica">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDZkratica" layoutX="150.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnDodajZanr" layoutX="152.0" layoutY="81.0" mnemonicParsing="false" onAction="#dodajZanr" prefHeight="27.0" prefWidth="236.0" text="Dodaj žanr" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Uredi žanr">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra žanra">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUZsifra" layoutX="160.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="118.0" text="Naziv">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUZnaziv" layoutX="160.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="140.0" text="Kratica">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUZkratica" layoutX="160.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnUrediZanr" layoutX="162.0" layoutY="124.0" mnemonicParsing="false" onAction="#urediZanr" prefHeight="27.0" prefWidth="236.0" text="Uredi žanr" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Pretraži žanrove">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="848.0">
+                                 <children>
+                                    <TableView fx:id="tableZanr" layoutX="-2.0" layoutY="156.0" prefHeight="267.0" prefWidth="852.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcSifraZanr" prefWidth="75.0" text="Sifra " />
+                                          <TableColumn fx:id="tcNazivZanr" prefWidth="75.0" text="Naziv" />
+                                          <TableColumn fx:id="tcKraticaZanr" prefWidth="75.0" text="Kratica" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="59.0" layoutY="24.0" prefHeight="26.0" prefWidth="428.0" text="Unesite ključnu riječ na osnovu koje želite pretražiti žanrove:">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfPZfilter" layoutX="484.0" layoutY="25.0" prefHeight="24.0" prefWidth="214.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Izbriši žanr">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="118.0" text="Šifra žanra">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfIZsifra" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnIzbrisiZanr" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiZanr" prefHeight="27.0" prefWidth="236.0" text="Izbriši žanr" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="paneAlbum" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Dodaj album">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Naziv albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDAnaziv" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="143.0" text="Broj pjesama">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDAbrojPjesama" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="80.0" prefHeight="26.0" prefWidth="118.0" text="Datum izdavanja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Button fx:id="btnDodajAlbum" layoutX="182.0" layoutY="118.0" mnemonicParsing="false" onAction="#dodajAlbum" prefHeight="27.0" prefWidth="236.0" text="Dodaj album" />
+                                    <DatePicker fx:id="dpDAdatIzd" layoutX="179.0" layoutY="81.0" prefHeight="24.0" prefWidth="241.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Uredi album">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUAsifraAlbum" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="118.0" text="Naziv albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUAnaziv" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="140.0" text="Broj pjesama">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUAbrojPjesama" layoutX="180.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="123.0" prefHeight="26.0" prefWidth="118.0" text="Datum izdavanja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Button fx:id="btnUrediAlbum" layoutX="182.0" layoutY="159.0" mnemonicParsing="false" onAction="#urediAlbum" prefHeight="27.0" prefWidth="236.0" text="Uredi album" />
+                                    <DatePicker fx:id="dpUAdatIzd" layoutX="180.0" layoutY="124.0" prefHeight="24.0" prefWidth="237.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Pretraži albume">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="848.0">
+                                 <children>
+                                    <TableView fx:id="tableAlbum" layoutX="-2.0" layoutY="156.0" prefHeight="267.0" prefWidth="852.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcSifraAlbum" prefWidth="75.0" text="Sifra " />
+                                          <TableColumn fx:id="tcNazivAlbum" prefWidth="75.0" text="Naziv" />
+                                          <TableColumn fx:id="tcBrojPjesamaAlbum" prefWidth="75.0" text="Broj pjesama" />
+                                          <TableColumn fx:id="tcDatIzdAlbum" prefWidth="75.0" text="Datum izdavanja" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="59.0" layoutY="24.0" prefHeight="26.0" prefWidth="428.0" text="Unesite ključnu riječ na osnovu koje želite pretražiti albume:">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfPAlbumFilter" layoutX="484.0" layoutY="25.0" prefHeight="24.0" prefWidth="214.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Izbriši album">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="118.0" text="Šifra albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfIAsifraAlbum" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnIzbrisiAlbum" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiAlbum" prefHeight="27.0" prefWidth="236.0" text="Izbriši album" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="paneSpot" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Dodaj spot">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra pjesme">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDSsifraPjesma" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="143.0" text="Šifra izvođača">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDSsifraIzvodjac" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="118.0" text="Šifra albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDSsifraAlbum" layoutX="180.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="120.0" prefHeight="26.0" prefWidth="118.0" text="Datum snimanja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Label layoutX="31.0" layoutY="153.0" prefHeight="26.0" prefWidth="118.0" text="Lokacija">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDSlokacija" layoutX="180.0" layoutY="154.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnDodajSpot" layoutX="182.0" layoutY="191.0" mnemonicParsing="false" onAction="#dodajSpot" prefHeight="27.0" prefWidth="236.0" text="Dodaj spot" />
+                                    <DatePicker fx:id="dpDSdatSnim" layoutX="179.0" layoutY="121.0" prefHeight="24.0" prefWidth="241.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Uredi spot">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra spota">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUSsifraSpot" layoutX="180.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="118.0" text="Šifra pjesme">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUSsifraPjesma" layoutX="180.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="85.0" prefHeight="26.0" prefWidth="140.0" text="Šifra izvođača">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUSsifraIzvodjac" layoutX="180.0" layoutY="86.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="120.0" prefHeight="26.0" prefWidth="118.0" text="Šifra albuma">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUSsifraAlbum" layoutX="180.0" layoutY="121.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="153.0" prefHeight="26.0" prefWidth="118.0" text="Datum snimanja">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <Label layoutX="31.0" layoutY="188.0" prefHeight="26.0" prefWidth="118.0" text="Lokacija">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUSlokacija" layoutX="180.0" layoutY="189.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnUrediSpot" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#urediSpot" prefHeight="27.0" prefWidth="236.0" text="Uredi spot" />
+                                    <DatePicker fx:id="dpUSdatSnim" layoutX="180.0" layoutY="154.0" prefHeight="24.0" prefWidth="237.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Pretraži spotove">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="848.0">
+                                 <children>
+                                    <TableView fx:id="tableSpot" layoutX="-2.0" layoutY="156.0" prefHeight="267.0" prefWidth="852.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcSifraSpot" prefWidth="75.0" text="Sifra spota" />
+                                          <TableColumn fx:id="tcDatSnimanjaSpot" prefWidth="75.0" text="Datum snimanja" />
+                                          <TableColumn fx:id="tcLokacijaSpot" prefWidth="75.0" text="Lokacija" />
+                                          <TableColumn fx:id="tcSifraPjesmaSpot" prefWidth="75.0" text="Sifra pjesme" />
+                                          <TableColumn fx:id="tcSifraIzvodjacSpot" prefWidth="75.0" text="Sifra izvodjaca" />
+                                          <TableColumn fx:id="tcSifraAlbumSpot" prefWidth="75.0" text="sifra albuma" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="59.0" layoutY="24.0" prefHeight="26.0" prefWidth="428.0" text="Unesite ključnu riječ na osnovu koje želite pretraežiti spotove:">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfPSfilter" layoutX="484.0" layoutY="25.0" prefHeight="24.0" prefWidth="214.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Izbriši spot">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="118.0" text="Šifra spota">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfISsifraSpot" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnIzbrisiSpot" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiSpot" prefHeight="27.0" prefWidth="236.0" text="Izbriši spot" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="paneFunkcija" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Dodaj funkciju">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Naziv">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfDFnaziv" layoutX="150.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnDodajFunkciju" layoutX="152.0" layoutY="48.0" mnemonicParsing="false" onAction="#dodajFunkciju" prefHeight="27.0" prefWidth="236.0" text="Dodaj funkciju" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Uredi funkciju">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="14.0" prefHeight="26.0" prefWidth="118.0" text="Šifra funkcije">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUFsifra" layoutX="160.0" layoutY="15.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Label layoutX="31.0" layoutY="49.0" prefHeight="26.0" prefWidth="118.0" text="Naziv">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfUFnaziv" layoutX="160.0" layoutY="50.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnUrediFunkciju" layoutX="162.0" layoutY="85.0" mnemonicParsing="false" onAction="#urediFunkcju" prefHeight="27.0" prefWidth="236.0" text="Uredi funkciju" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Pretraži funkcije">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="848.0">
+                                 <children>
+                                    <TableView fx:id="tableFunkcija" layoutX="-2.0" layoutY="156.0" prefHeight="267.0" prefWidth="852.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcSifraFunkcija" prefWidth="75.0" text="Sifra " />
+                                          <TableColumn fx:id="tcNazivFunkcija" prefWidth="75.0" text="Naziv" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="59.0" layoutY="24.0" prefHeight="26.0" prefWidth="428.0" text="Unesite ključnu riječ na osnovu koje želite pretražiti funkcije:">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfPFfilter" layoutX="484.0" layoutY="25.0" prefHeight="24.0" prefWidth="214.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Izbriši funkciju">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="603.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="22.0" prefHeight="26.0" prefWidth="118.0" text="Šifra funkcije">
+                                       <opaqueInsets>
+                                          <Insets bottom="5.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <TextField fx:id="tfIFsifra" layoutX="132.0" layoutY="23.0" prefHeight="24.0" prefWidth="239.0" />
+                                    <Button fx:id="btnIzbrisiFunkciju" layoutX="134.0" layoutY="60.0" mnemonicParsing="false" onAction="#izbrisiFunkciju" prefHeight="27.0" prefWidth="236.0" text="Izbriši funkciju" />
                                  </children>
                               </AnchorPane>
                            </content>

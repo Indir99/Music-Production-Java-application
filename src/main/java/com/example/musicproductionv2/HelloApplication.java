@@ -128,4 +128,100 @@ public class HelloApplication extends Application {
         }
         return listKompozitor;
     }
+
+
+    public static ObservableList<osoba> getDataOsoba() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<osoba> listOsoba = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM osoba");
+            while (rs.next()){
+                listOsoba.add(new osoba(Integer.parseInt(rs.getString("sifraOsoba")),rs.getString("imeOsoba"),
+                        rs.getString("prezimeOsoba"),rs.getString("zanimanjeOsoba"), rs.getString("adresaOsoba"),
+                        rs.getString("kontaktOsoba"),rs.getDate("datumRodjOsoba")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listOsoba;
+    }
+
+
+    public static ObservableList<zanr> getDataZanr() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<zanr> listZanr = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM zanr");
+            while (rs.next()){
+                listZanr.add(new zanr(Integer.parseInt(rs.getString("sifraZanr")),rs.getString("nazivZanr"),
+                        rs.getString("kraticaZanr")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listZanr;
+    }
+
+    public static ObservableList<album> getDataAlbum() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<album> listAlbum = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM album");
+            while (rs.next()){
+                listAlbum.add(new album(Integer.parseInt(rs.getString("sifraAlbum")),Integer.parseInt(rs.getString("brojPjesamaAlbum")),
+                        rs.getString("nazivAlbum"),rs.getDate("datumIzdavanaAlbum")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listAlbum;
+    }
+
+
+
+    public static ObservableList<spot> getDataSpot() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<spot> listSpot = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM spot");
+            while (rs.next()){
+                listSpot.add(new spot(Integer.parseInt(rs.getString("sifraSpot")),Integer.parseInt(rs.getString("sifraPjesma")),
+                        Integer.parseInt(rs.getString("sifraIzvodjac")),Integer.parseInt(rs.getString("sifraAlbum")), rs.getString("lokacijaSpot"),
+                        rs.getDate("datumSpot")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listSpot;
+    }
+
+
+    public static ObservableList<funkcija> getDataFunkcija() throws SQLException {
+        Connection conn = ConnectDb();
+
+        ObservableList<funkcija> listFunkcija = FXCollections.observableArrayList();
+        try{
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM funkcija");
+            while (rs.next()){
+                listFunkcija.add(new funkcija(Integer.parseInt(rs.getString("sifraFunkcija")),rs.getString("nazivFunkcija")));
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.fillInStackTrace());
+        }
+        return listFunkcija;
+    }
 }

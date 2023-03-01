@@ -19,10 +19,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static java.lang.String.valueOf;
+
 public class HelloController implements Initializable {
 
     //Panes
-    public TabPane paneIzvodjac, panePjesma, paneTekstopisac, paneAranzer, paneKompozitor;
+    public TabPane paneIzvodjac, panePjesma, paneTekstopisac, paneAranzer, paneKompozitor, paneOsoba, paneZanr, paneAlbum;
+    public TabPane paneSpot, paneFunkcija;
 
     // Menu buttons
     public Button btnPjesma, btnIzvodjac, btnTekstopisac, btnAranzer, btnKompozitor;
@@ -116,6 +119,112 @@ public class HelloController implements Initializable {
     //Pretrazi kompozitora:
     public TextField tfPKfilter;
 
+
+
+    // Osoba - table
+    public TableView<osoba> tableOsoba;
+    public TableColumn<osoba,Integer> tcSifraOsoba;
+    public TableColumn<osoba,String> tcImeOsoba, tcPrezimeOsoba, tcZanimanjeOsoba, tcAdresaOsoba, tcKontaktOsoba;
+    public TableColumn<osoba, Date> tcDatRodjOsoba;
+    ObservableList<osoba> listOsoba;
+    ObservableList<osoba> dataListOsoba;
+    // Dodaj osobu
+    public TextField tfDOime, tfDOprezime, tfDOzanimanje, tfDOadresa, tfDOkontakt;
+    public DatePicker dpDOdatRodj;
+    public Button btnDodajOsobu;
+    //Uredi osobu
+    public TextField tfUOsifra, tfUOime, tfUOprezime, tfUOzanimanje, tfUOadresa, tfUOkontakt;
+    public DatePicker dpUOdatRodj;
+    public Button btnUrediOsobu;
+    //Izbrisi osobu
+    public TextField tfIOsifra;
+    public Button btnIzbrisiOsobu;
+    //Pretrazi osobu:
+    public TextField tfPOfilter;
+
+    // Zanr - table
+    public TableView<zanr> tableZanr;
+    public TableColumn<zanr,Integer> tcSifraZanr;
+    public TableColumn<zanr,String> tcNazivZanr, tcKraticaZanr;
+    ObservableList<zanr> listZanr;
+    ObservableList<zanr> dataListZanr;
+    // Dodaj zanr
+    public TextField tfDZnaziv, tfDZkratica;
+    public Button btnDodajZanr;
+    //Uredi zanr
+    public TextField tfUZsifra, tfUZnaziv, tfUZkratica;
+    public Button btnUrediZanr;
+    //Izbrisi zanr
+    public TextField tfIZsifra;
+    public Button btnIzbrisiZanr;
+    //Pretrazi zanr:
+    public TextField tfPZfilter;
+
+
+    // Album - table
+    public TableView<album> tableAlbum;
+    public TableColumn<album,Integer> tcSifraAlbum, tcBrojPjesamaAlbum;
+    public TableColumn<album,String> tcNazivAlbum;
+    public TableColumn<album, Date> tcDatIzdAlbum;
+    ObservableList<album> listAlbum;
+    ObservableList<album> dataListAlbum;
+    // Dodaj album
+    public TextField tfDAnaziv, tfDAbrojPjesama;
+    public DatePicker dpDAdatIzd;
+    public Button btnDodajAlbum;
+    //Uredi album
+    public TextField tfUAsifraAlbum, tfUAnaziv, tfUAbrojPjesama;
+    public DatePicker dpUAdatIzd;
+    public Button btnUrediAlbum;
+    //Izbrisi osobu
+    public TextField tfIAsifraAlbum;
+    public Button btnIzbrisiAlbum;
+    //Pretrazi osobu:
+    public TextField tfPAlbumFilter;
+
+
+
+    // Spot - table
+    public TableView<spot> tableSpot;
+    public TableColumn<spot,Integer> tcSifraSpot, tcSifraPjesmaSpot, tcSifraIzvodjacSpot, tcSifraAlbumSpot;
+    public TableColumn<spot,String> tcLokacijaSpot;
+    public TableColumn<spot, Date> tcDatSnimanjaSpot;
+    ObservableList<spot> listSpot;
+    ObservableList<spot> dataListSpot;
+    // Dodaj spot
+    public TextField tfDSsifraPjesma, tfDSsifraIzvodjac, tfDSsifraAlbum, tfDSlokacija;
+    public DatePicker dpDSdatSnim;
+    public Button btnDodajSpot;
+    //Uredi spot
+    public TextField tfUSsifraSpot, tfUSsifraPjesma, tfUSsifraIzvodjac, tfUSsifraAlbum, tfUSlokacija;
+    public DatePicker dpUSdatSnim;
+    public Button btnUrediSpot;
+    //Izbrisi spot
+    public TextField tfISsifraSpot;
+    public Button btnIzbrisiSpot;
+    //Pretrazi spot:
+    public TextField tfPSfilter;
+
+
+    // Funkcija - table
+    public TableView<funkcija> tableFunkcija;
+    public TableColumn<funkcija,Integer> tcSifraFunkcija;
+    public TableColumn<funkcija,String> tcNazivFunkcija;
+    ObservableList<funkcija> listFunkcija;
+    ObservableList<funkcija> dataListFunkcija;
+    // Dodaj funkciju
+    public TextField tfDFnaziv;
+    public Button btnDodajFunkciju;
+    //Uredi funkciju
+    public TextField tfUFsifra, tfUFnaziv;
+    public Button btnUrediFunkciju;
+    //Izbrisi funkciju
+    public TextField tfIFsifra;
+    public Button btnIzbrisiFunkciju;
+    //Pretrazi funkciju:
+    public TextField tfPFfilter;
+
+
     //Connection
     Connection conn = null;
     ResultSet rs = null;
@@ -131,6 +240,11 @@ public class HelloController implements Initializable {
             paneTekstopisac.setVisible(false);
             paneAranzer.setVisible(false);
             paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
         }
         else if(event.getSource()==btnIzvodjac) {
             paneIzvodjac.setVisible(true);
@@ -138,6 +252,11 @@ public class HelloController implements Initializable {
             paneTekstopisac.setVisible(false);
             paneAranzer.setVisible(false);
             paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
         }
         else if(event.getSource()==btnTekstopisac) {
             paneTekstopisac.setVisible(true);
@@ -145,6 +264,11 @@ public class HelloController implements Initializable {
             paneIzvodjac.setVisible(false);
             paneAranzer.setVisible(false);
             paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
         }
         else if(event.getSource()==btnAranzer){
             paneAranzer.setVisible(true);
@@ -152,6 +276,11 @@ public class HelloController implements Initializable {
             paneIzvodjac.setVisible(false);
             paneTekstopisac.setVisible(false);
             paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
         }
         else if(event.getSource()==btnKompozitor){
             paneKompozitor.setVisible(true);
@@ -159,6 +288,72 @@ public class HelloController implements Initializable {
             paneIzvodjac.setVisible(false);
             paneTekstopisac.setVisible(false);
             paneAranzer.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
+        }
+        else if(event.getSource()==btnOsoba){
+            paneOsoba.setVisible(true);
+            panePjesma.setVisible(false);
+            paneIzvodjac.setVisible(false);
+            paneTekstopisac.setVisible(false);
+            paneAranzer.setVisible(false);
+            paneKompozitor.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
+        }
+        else if(event.getSource()==btnZanr){
+            paneZanr.setVisible(true);
+            panePjesma.setVisible(false);
+            paneIzvodjac.setVisible(false);
+            paneTekstopisac.setVisible(false);
+            paneAranzer.setVisible(false);
+            paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
+
+        }
+        else if(event.getSource()==btnAlbum){
+            paneAlbum.setVisible(true);
+            panePjesma.setVisible(false);
+            paneIzvodjac.setVisible(false);
+            paneTekstopisac.setVisible(false);
+            paneAranzer.setVisible(false);
+            paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneSpot.setVisible(false);
+            paneFunkcija.setVisible(false);
+        }
+        else if(event.getSource()==btnSpot){
+            paneSpot.setVisible(true);
+            panePjesma.setVisible(false);
+            paneIzvodjac.setVisible(false);
+            paneTekstopisac.setVisible(false);
+            paneAranzer.setVisible(false);
+            paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneFunkcija.setVisible(false);
+        } else if (event.getSource()==btnFunkcija) {
+            paneFunkcija.setVisible(true);
+            panePjesma.setVisible(false);
+            paneIzvodjac.setVisible(false);
+            paneTekstopisac.setVisible(false);
+            paneAranzer.setVisible(false);
+            paneKompozitor.setVisible(false);
+            paneOsoba.setVisible(false);
+            paneZanr.setVisible(false);
+            paneAlbum.setVisible(false);
+            paneSpot.setVisible(false);
+
         }
 
     }
@@ -171,6 +366,11 @@ public class HelloController implements Initializable {
         paneTekstopisac.setVisible(false);
         paneAranzer.setVisible(false);
         paneKompozitor.setVisible(false);
+        paneOsoba.setVisible(false);
+        paneZanr.setVisible(false);
+        paneAlbum.setVisible(false);
+        paneSpot.setVisible(false);
+        paneFunkcija.setVisible(false);
 
         updateIzvodjacTable();
         pretraziIzvodjace();
@@ -183,6 +383,21 @@ public class HelloController implements Initializable {
 
         updateKompozitorTable();
         pretraziKompozitore();
+
+        updateOsobaTable();
+        pretraziOsobe();
+
+        updateZanrTable();
+        pretraziZanr();
+
+        updateAlbumTable();
+        pretraziAlbume();
+
+        updateSpotTable();
+        pretraziSpotove();
+
+        updateFunkcijaTable();
+        pretraziFunkcije();
 
 
     }
@@ -908,4 +1123,717 @@ public class HelloController implements Initializable {
         }
         return false;
     }
+
+    /* ----------------------------------------------- osoba ------------------------------------------*/
+    public void dodajOsobu() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO osoba (imeOsoba, prezimeOsoba, zanimanjeOsoba, datumRodjOsoba, adresaOsoba, kontaktOsoba) VALUES (?,?,?,?,?,?)";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,tfDOime.getText());
+            pst.setString(2,tfDOprezime.getText());
+            pst.setString(3,tfDOzanimanje.getText());
+            pst.setDate(4, java.sql.Date.valueOf(dpDOdatRodj.getValue()));
+            pst.setString(5,tfDOadresa.getText());
+            pst.setString(6,tfDOkontakt.getText());
+            pst.execute();
+
+            AlertBox.display("Dodaj osobu","Uspješno ste dodali osobu koja radi na spotu.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj osobu","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updateOsobaTable();
+        pretraziOsobe();
+    }
+
+    public void urediOsobu(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUOsifra.getText());
+            String ime = tfUOime.getText();
+            if(!(ime.isEmpty()))
+            {
+                String sql = "UPDATE osoba SET imeOsoba = '"+ime+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String prezime = tfUOprezime.getText();
+            if(!(prezime.isEmpty()))
+            {
+                String sql = "UPDATE osoba SET prezimeOsoba = '"+prezime+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String zanimanje = tfUOzanimanje.getText();
+            if(!(zanimanje.isEmpty()))
+            {
+                String sql = "UPDATE osoba SET zanimanjeOsoba = '"+zanimanje+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String adresa = tfUOadresa.getText();
+            if(!(adresa.isEmpty()))
+            {
+                String sql = "UPDATE osoba SET adresaOsoba = '"+adresa+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String kontakt = tfUOkontakt.getText();
+            if(!(kontakt.isEmpty()))
+            {
+                String sql = "UPDATE osoba SET kontaktOsoba = '"+kontakt+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Date datRodj = java.sql.Date.valueOf(dpUOdatRodj.getValue());
+            if(datRodj != null)
+            {
+                String sql = "UPDATE osoba SET datumRodjOsoba='"+datRodj+"' WHERE sifraOsoba ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            AlertBox.display("Uredi osobu","Uspješno ste izmijenili podatke o osobi.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi osobu","Error: Neuspješna izmjena.");
+        }
+        updateOsobaTable();
+        pretraziOsobe();
+    }
+
+    public void updateOsobaTable(){
+        try {
+            tcSifraOsoba.setCellValueFactory(new PropertyValueFactory<osoba, Integer>("sifra"));
+            tcImeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Ime"));
+            tcPrezimeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Prezime"));
+            tcZanimanjeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("zanimanje"));
+            tcAdresaOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Adresa"));
+            tcKontaktOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Kontakt"));
+            tcDatRodjOsoba.setCellValueFactory(new PropertyValueFactory<osoba, Date>("DatRodj"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listOsoba = HelloApplication.getDataOsoba();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableOsoba.setItems(listOsoba);
+    }
+
+    public void izbrisiOsobu() {
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfIOsifra.getText());
+            if(checkIDosoba(sifra)) {
+                String sql = "DELETE FROM osoba WHERE sifraOsoba='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updateOsobaTable();
+                pretraziOsobe();
+                AlertBox.display("Izbriši osobu","Uspješno ste izbrisali osobu.");
+            }
+            else{
+                AlertBox.display("Izbriši osobu","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši osobu","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziOsobe(){
+        tcSifraOsoba.setCellValueFactory(new PropertyValueFactory<osoba, Integer>("sifra"));
+        tcImeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Ime"));
+        tcPrezimeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Prezime"));
+        tcZanimanjeOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("zanimanje"));
+        tcAdresaOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Adresa"));
+        tcKontaktOsoba.setCellValueFactory(new PropertyValueFactory<osoba, String>("Kontakt"));
+        tcDatRodjOsoba.setCellValueFactory(new PropertyValueFactory<osoba, Date>("DatRodj"));
+        try {
+            dataListOsoba = HelloApplication.getDataOsoba();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableOsoba.setItems(dataListOsoba);
+        FilteredList<osoba> filteredData = new FilteredList<>(dataListOsoba, b -> true);
+        tfPOfilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getIme().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getPrezime().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getZanimanje().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getAdresa().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getKontakt().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                //else if(person.getSifra() == Integer.valueOf(tfPIfilter.getText())) {
+                //    return true;
+                //}
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<osoba> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableOsoba.comparatorProperty());
+        tableOsoba.setItems(sortedData);
+    }
+    private boolean checkIDosoba(Integer sifra) {
+        for (osoba singer : listOsoba) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /* ----------------------------------------------- zanr ------------------------------------------*/
+    public void dodajZanr() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO zanr (nazivZanr, kraticaZanr) VALUES (?,?)";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,tfDZnaziv.getText());
+            pst.setString(2,tfDZkratica.getText());
+            pst.execute();
+
+            AlertBox.display("Dodaj žanr","Uspješno ste dodali žanr.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj žanr","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updateZanrTable();
+        pretraziZanr();
+    }
+
+    public void urediZanr(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUZsifra.getText());
+            String naziv = tfUZnaziv.getText();
+            if(!(naziv.isEmpty()))
+            {
+                String sql = "UPDATE zanr SET nazivZanr = '"+naziv+"' WHERE sifraZanr ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String kratica = tfUZkratica.getText();
+            if(!(kratica.isEmpty()))
+            {
+                String sql = "UPDATE zanr SET kraticaZanr = '"+kratica+"' WHERE sifraZanr ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            AlertBox.display("Uredi žanr","Uspješno ste izmijenili podatke o žanru.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi žanr","Error: Neuspješna izmjena.");
+        }
+        updateZanrTable();
+        pretraziZanr();
+    }
+
+    public void updateZanrTable(){
+        try {
+            tcSifraZanr.setCellValueFactory(new PropertyValueFactory<zanr, Integer>("sifra"));
+            tcNazivZanr.setCellValueFactory(new PropertyValueFactory<zanr, String>("Naziv"));
+            tcKraticaZanr.setCellValueFactory(new PropertyValueFactory<zanr, String>("kratica"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listZanr = HelloApplication.getDataZanr();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableZanr.setItems(listZanr);
+    }
+
+    public void izbrisiZanr() {
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfIZsifra.getText());
+            if(checkIDzanr(sifra)) {
+                String sql = "DELETE FROM zanr WHERE sifraZanr='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updateZanrTable();
+                pretraziZanr();
+                AlertBox.display("Izbriši žanr","Uspješno ste izbrisali žanr.");
+            }
+            else{
+                AlertBox.display("Izbriši žanr","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši žanr","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziZanr(){
+        tcSifraZanr.setCellValueFactory(new PropertyValueFactory<zanr, Integer>("sifra"));
+        tcNazivZanr.setCellValueFactory(new PropertyValueFactory<zanr, String>("Naziv"));
+        tcKraticaZanr.setCellValueFactory(new PropertyValueFactory<zanr, String>("kratica"));
+        try {
+            dataListZanr = HelloApplication.getDataZanr();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableZanr.setItems(dataListZanr);
+        FilteredList<zanr> filteredData = new FilteredList<>(dataListZanr, b -> true);
+        tfPZfilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getNaziv().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else if(person.getKratica().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<zanr> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableZanr.comparatorProperty());
+        tableZanr.setItems(sortedData);
+    }
+    private boolean checkIDzanr(Integer sifra) {
+        for (zanr singer : listZanr) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* ----------------------------------------------- album ------------------------------------------*/
+    public void dodajAlbum() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO album (nazivAlbum, brojPjesamaAlbum, datumIzdavanaAlbum) VALUES (?,?,?)";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,tfDAnaziv.getText());
+            pst.setInt(2, Integer.parseInt(tfDAbrojPjesama.getText()));
+            pst.setDate(3, java.sql.Date.valueOf(dpDAdatIzd.getValue()));
+            pst.execute();
+
+            AlertBox.display("Dodaj album","Uspješno ste dodali album.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj album","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updateAlbumTable();
+        pretraziAlbume();
+    }
+
+    public void urediAlbum(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUOsifra.getText());
+            String naziv = tfUAnaziv.getText();
+            if(!(naziv.isEmpty()))
+            {
+                String sql = "UPDATE album SET nazivAlbum = '"+naziv+"' WHERE nazivAlbum ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Integer brojPjesama = Integer.valueOf(tfUAbrojPjesama.getText());
+            if(brojPjesama > 0)
+            {
+                String sql = "UPDATE album SET brojPjesamaAlbum = '"+brojPjesama+"' WHERE sifraAlbum ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Date datIzd = java.sql.Date.valueOf(dpUAdatIzd.getValue());
+            if(datIzd != null)
+            {
+                String sql = "UPDATE album SET datumIzdavanaAlbum='"+datIzd+"' WHERE sifraAlbum ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            AlertBox.display("Uredi album","Uspješno ste izmijenili podatke o albumu.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi album","Error: Neuspješna izmjena.");
+        }
+        updateAlbumTable();
+        pretraziAlbume();
+    }
+
+    public void updateAlbumTable(){
+        try {
+            tcSifraAlbum.setCellValueFactory(new PropertyValueFactory<album, Integer>("sifra"));
+            tcNazivAlbum.setCellValueFactory(new PropertyValueFactory<album, String>("naziv"));
+            tcBrojPjesamaAlbum.setCellValueFactory(new PropertyValueFactory<album, Integer>("brojPjesama"));
+            tcDatIzdAlbum.setCellValueFactory(new PropertyValueFactory<album, Date>("DatIzd"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listAlbum = HelloApplication.getDataAlbum();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableAlbum.setItems(listAlbum);
+    }
+
+    public void izbrisiAlbum() {
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfIAsifraAlbum.getText());
+            if(checkIDalbum(sifra)) {
+                String sql = "DELETE FROM album WHERE sifraAlbum='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updateAlbumTable();
+                pretraziAlbume();
+                AlertBox.display("Izbriši album","Uspješno ste izbrisali album.");
+            }
+            else{
+                AlertBox.display("Izbriši album","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši album","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziAlbume(){
+        tcSifraAlbum.setCellValueFactory(new PropertyValueFactory<album, Integer>("sifra"));
+        tcNazivAlbum.setCellValueFactory(new PropertyValueFactory<album, String>("naziv"));
+        tcBrojPjesamaAlbum.setCellValueFactory(new PropertyValueFactory<album, Integer>("brojPjesama"));
+        tcDatIzdAlbum.setCellValueFactory(new PropertyValueFactory<album, Date>("DatIzd"));
+        try {
+            dataListAlbum = HelloApplication.getDataAlbum();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableAlbum.setItems(dataListAlbum);
+        FilteredList<album> filteredData = new FilteredList<>(dataListAlbum, b -> true);
+        tfPAlbumFilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getNaziv().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<album> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableAlbum.comparatorProperty());
+        tableAlbum.setItems(sortedData);
+    }
+    private boolean checkIDalbum(Integer sifra) {
+        for (album singer : listAlbum) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /* ----------------------------------------------- spot ------------------------------------------*/
+    public void dodajSpot() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO spot (sifraPjesma, sifraIzvodjac, sifraAlbum, lokacijaSpot, datumSpot) VALUES (?,?,?,?,?)";
+        try{
+
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(tfDSsifraPjesma.getText()));
+            pst.setInt(2, Integer.parseInt(tfDSsifraIzvodjac.getText()));
+            pst.setInt(3, Integer.parseInt(tfDSsifraAlbum.getText()));
+            pst.setString(4,tfDSlokacija.getText());
+            pst.setDate(5, java.sql.Date.valueOf(dpDSdatSnim.getValue()));
+            pst.execute();
+
+            AlertBox.display("Dodaj spot","Uspješno ste dodali spot.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj spot","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updateSpotTable();
+        pretraziSpotove();
+    }
+
+    public void urediSpot(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUSsifraSpot.getText());
+            Integer sifraPjesma = Integer.valueOf(tfUSsifraPjesma.getText());
+            if(sifraPjesma >= 0)
+            {
+                String sql = "UPDATE spot SET sifraPjesma = '"+sifraPjesma+"' WHERE sifraSpot ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Integer sifraIzvodjac = Integer.valueOf(tfUSsifraIzvodjac.getText());
+            if(sifraIzvodjac >= 0)
+            {
+                String sql = "UPDATE spot SET sifraIzvodjac = '"+sifraIzvodjac+"' WHERE sifraSpot ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Integer sifraAlbum = Integer.valueOf(tfUSsifraAlbum.getText());
+            if(sifraAlbum>=0)
+            {
+                String sql = "UPDATE spot SET sifraAlbum = '"+sifraAlbum+"' WHERE sifraSpot ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            String lokacija = tfUSlokacija.getText();
+            if(!(lokacija.isEmpty()))
+            {
+                String sql = "UPDATE spot SET lokacijaSpot = '"+lokacija+"' WHERE sifraSpot ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            Date datSnim = java.sql.Date.valueOf(dpUSdatSnim.getValue());
+            if(datSnim != null)
+            {
+                String sql = "UPDATE spot SET datumSpot='"+datSnim+"' WHERE sifraSpot ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            AlertBox.display("Uredi spot","Uspješno ste izmijenili podatke o spotu.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi spotu","Error: Neuspješna izmjena.");
+        }
+        updateSpotTable();
+        pretraziSpotove();
+    }
+
+    public void updateSpotTable(){
+        try {
+            tcSifraSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifra"));
+            tcSifraPjesmaSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraPjesma"));
+            tcSifraIzvodjacSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraIzvodjac"));
+            tcSifraAlbumSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraAlbum"));
+            tcLokacijaSpot.setCellValueFactory(new PropertyValueFactory<spot, String>("Lokacija"));
+            tcDatSnimanjaSpot.setCellValueFactory(new PropertyValueFactory<spot, Date>("DatumSnimanja"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listSpot = HelloApplication.getDataSpot();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableSpot.setItems(listSpot);
+    }
+
+    public void izbrisiSpot(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfISsifraSpot.getText());
+            if(checkIDspot(sifra)) {
+                String sql = "DELETE FROM spot WHERE sifraSpot='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updateSpotTable();
+                pretraziSpotove();
+                AlertBox.display("Izbriši spot","Uspješno ste izbrisali spot.");
+            }
+            else{
+                AlertBox.display("Izbriši spot","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši spot","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziSpotove(){
+        tcSifraSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifra"));
+        tcSifraPjesmaSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraPjesma"));
+        tcSifraIzvodjacSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraIzvodjac"));
+        tcSifraAlbumSpot.setCellValueFactory(new PropertyValueFactory<spot, Integer>("sifraAlbum"));
+        tcLokacijaSpot.setCellValueFactory(new PropertyValueFactory<spot, String>("Lokacija"));
+        tcDatSnimanjaSpot.setCellValueFactory(new PropertyValueFactory<spot, Date>("DatumSnimanja"));
+        try {
+            dataListSpot = HelloApplication.getDataSpot();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableSpot.setItems(dataListSpot);
+        FilteredList<spot> filteredData = new FilteredList<>(dataListSpot, b -> true);
+        tfPSfilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getLokacija().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<spot> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableSpot.comparatorProperty());
+        tableSpot.setItems(sortedData);
+    }
+    private boolean checkIDspot(Integer sifra) {
+        for (spot singer : listSpot) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /* ----------------------------------------------- funkcija ------------------------------------------*/
+    public void dodajFunkciju() {
+        conn = HelloApplication.ConnectDb();
+        String sql = "INSERT INTO funkcija (nazivZanr) VALUES (?)";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,tfDFnaziv.getText());
+            pst.execute();
+
+            AlertBox.display("Dodaj funkciju","Uspješno ste dodali funkciju.");
+
+        } catch (Exception e){
+            AlertBox.display("Dodaj funkciju","Error: Provjerite da li su sva polja ispravno popunjena.");
+            System.out.println(e.fillInStackTrace());
+        }
+        updateFunkcijaTable();
+        pretraziFunkcije();
+    }
+
+    public void urediFunkcju(){
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfUFsifra.getText());
+            String naziv = tfUFnaziv.getText();
+            if(!(naziv.isEmpty()))
+            {
+                String sql = "UPDATE funkcija SET nazivFunkcija = '"+naziv+"' WHERE sifraFunkcija ='"+sifra+"';";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+            }
+            AlertBox.display("Uredi funkciju","Uspješno ste izmijenili podatke o funkciji.");
+        } catch (Exception e){
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Uredi funkciju","Error: Neuspješna izmjena.");
+        }
+        updateFunkcijaTable();
+        pretraziFunkcije();
+    }
+
+    public void updateFunkcijaTable(){
+        try {
+            tcSifraFunkcija.setCellValueFactory(new PropertyValueFactory<funkcija, Integer>("sifra"));
+            tcNazivFunkcija.setCellValueFactory(new PropertyValueFactory<funkcija, String>("Naziv"));
+        }
+        catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        try {
+            listFunkcija = HelloApplication.getDataFunkcija();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableFunkcija.setItems(listFunkcija);
+    }
+
+    public void izbrisiFunkciju() {
+        try {
+            conn = HelloApplication.ConnectDb();
+            Integer sifra = Integer.valueOf(tfIFsifra.getText());
+            if(checkIDfunkcija(sifra)) {
+                String sql = "DELETE FROM funkcija WHERE sifraFunkcija='"+sifra+"'";
+                pst = conn.prepareStatement(sql);
+                pst.execute();
+                updateFunkcijaTable();
+                pretraziFunkcije();
+                AlertBox.display("Izbriši funkciju","Uspješno ste izbrisali funkciju.");
+            }
+            else{
+                AlertBox.display("Izbriši funkciju","Error: Pogrešno unesen ID.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.fillInStackTrace());
+            AlertBox.display("Izbriši funkciju","Error: Neuspješno brisanje.");
+        }
+    }
+
+    public void pretraziFunkcije(){
+        tcSifraFunkcija.setCellValueFactory(new PropertyValueFactory<funkcija, Integer>("sifra"));
+        tcNazivFunkcija.setCellValueFactory(new PropertyValueFactory<funkcija, String>("Naziv"));
+        try {
+            dataListFunkcija = HelloApplication.getDataFunkcija();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableFunkcija.setItems(dataListFunkcija);
+        FilteredList<funkcija> filteredData = new FilteredList<>(dataListFunkcija, b -> true);
+        tfPZfilter.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(person.getNaziv().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+        } ));
+        SortedList<funkcija> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableFunkcija.comparatorProperty());
+        tableFunkcija.setItems(sortedData);
+    }
+    private boolean checkIDfunkcija(Integer sifra) {
+        for (funkcija singer : listFunkcija) {
+            if (sifra == singer.getSifra()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
