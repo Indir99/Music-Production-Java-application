@@ -49,7 +49,7 @@
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane fx:id="paneIzvodjac" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneIzvodjac" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj izvođača">
                            <content>
@@ -234,7 +234,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneTekstopisac" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneTekstopisac" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj tekstopisca">
                            <content>
@@ -377,7 +377,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneAranzer" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneAranzer" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj aranžera">
                            <content>
@@ -520,7 +520,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneKompozitor" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneKompozitor" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj kompozitora">
                            <content>
@@ -663,7 +663,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneOsoba" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneOsoba" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj osobu">
                            <content>
@@ -806,7 +806,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneZanr" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneZanr" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj žanr">
                            <content>
@@ -897,7 +897,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneAlbum" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneAlbum" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj album">
                            <content>
@@ -1001,7 +1001,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneSpot" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneSpot" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj spot">
                            <content>
@@ -1131,7 +1131,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <TabPane fx:id="paneFunkcija" opacity="0.0" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="paneFunkcija" prefHeight="464.0" prefWidth="848.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Dodaj funkciju">
                            <content>
